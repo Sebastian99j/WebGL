@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    height: 100vh;
+}
+
+canvas {
+    display: block;
+}
+
+#mainTitle {
+    width: 100%;
+    position: absolute;
+    color: aliceblue;
+    text-align: center;
+    align-items: center;
+    font-size: 40px;
+    margin-top: 30px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+.counter1 {
+    position: absolute;
+    color: aliceblue;
+    display: flex;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-left: 5%;
+}
+
+.counter2 {
+    position: absolute;
+    color: aliceblue;
+    display: flex;
+    font-size: 30px;
+    margin-top: 70px;
+    margin-left: 5%;
+}
+  
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+#gamer1 {
+    height: 40px;
+    width: 40px;
+    margin-top: 30px;
+    margin-right: 20px;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 50%;
+}
+
+#gamer2 {
+    height: 40px;
+    width: 40px;
+    margin-top: 30px;
+    margin-right: 20px;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 50%;
+}
+
+#start {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+}
+
+#number1 {
+    margin-left: 10px;
+}
+
+#number2 {
+    margin-left: 10px;
+}
+
+#curtain {
+    height: 100%;
+    width: 100%;
+    background-color: blue;
+}
