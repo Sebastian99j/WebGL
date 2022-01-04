@@ -10,6 +10,8 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
 directionalLight.position.set(100, -300, 400);
 scene.add(directionalLight);
 
+loader = new THREE.TextureLoader()
+
 const aspectRatio = window.innerWidth / window.innerHeight;
 var cameraWidth = 1900;
 var cameraHeight = cameraWidth / aspectRatio;
@@ -87,6 +89,20 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.render(scene, camera);
 
 document.getElementById("game").appendChild(renderer.domElement)
+
+function Table(){
+
+    const geometry = new THREE.BoxGeometry(1200, 1200, 100);
+
+    const cubeMaterial = new THREE.MeshStandardMaterial({
+        map:loader.load('wood.jpg')
+    });
+    cubeMaterial.color.convertSRGBToLinear();
+
+    const cubeMesh = new THREE.Mesh( geometry, cubeMaterial );
+    
+    return cubeMesh;
+}
 
 function Plane(){
 
@@ -208,17 +224,6 @@ function Pawn(number){
     pawnMesh.userData.draggable = true;
 
     return pawnMesh;
-}
-
-function Table(){
-    const geometry = new THREE.BoxGeometry(1200, 1200, 100);
-
-    const tableMesh = new THREE.Mesh(
-        geometry,
-        new THREE.MeshStandardMaterial({color: "#5C4033"})
-    );
-
-    return tableMesh;
 }
 
 function Reset(){
