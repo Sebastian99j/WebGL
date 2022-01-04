@@ -4,6 +4,7 @@ let start = document.getElementById('start');
 
 let mainTitle = document.getElementById('mainTitle');
 let curtain = document.getElementById('curtain');
+let game = document.getElementById('game');
 
 let int1 = document.getElementById('number1');
 let int2 = document.getElementById('number2');
@@ -25,4 +26,5 @@ start.addEventListener('click', function(){
     mainTitle.style.display = "none";
     curtain.style.display = "none";
     start.style.display = "none";
+    game.style.display = "inline";
 });
