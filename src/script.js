@@ -86,6 +86,7 @@ window.addEventListener('click', event => {
 
 const renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor("#87CEFA");
 renderer.render(scene, camera);
 
 document.getElementById("game").appendChild(renderer.domElement)

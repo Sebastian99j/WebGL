@@ -90,3 +90,15 @@ canvas {
     width: 100%;
     background-color: blue;
 }
+
+#win {
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 60px;
+    font-weight: bold;
+}
