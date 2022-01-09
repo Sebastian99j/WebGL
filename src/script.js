@@ -21,7 +21,7 @@ const clickMouse = new THREE.Vector2();
 const moveMouse = new THREE.Vector2();
 var draggable = new THREE.Object3D;
 
-const camera = new THREE.OrthographicCamera(
+var camera = new THREE.OrthographicCamera(
     cameraWidth / -2,
     cameraWidth / 2,
     cameraHeight / 2,
@@ -279,10 +279,10 @@ window.addEventListener("keydown", function(event) {
         return;
     }
 
-    if (event.key == "+"){
+    if (event.key == "-"){
         cameraHeight += 100;
         cameraWidth += 100;
-        const camera = new THREE.OrthographicCamera(
+        camera = new THREE.OrthographicCamera(
             cameraWidth / -2,
             cameraWidth / 2,
             cameraHeight / 2,
@@ -292,14 +292,15 @@ window.addEventListener("keydown", function(event) {
         );
         camera.position.set(0, -210, 300);
         camera.lookAt(look1, look2, look3);
+        scene.add(camera);
         renderer.render(scene, camera);
         return;
     }
 
-    if (event.key == "-"){
-        cameraHeight -= 100;
-        cameraWidth -= 100;
-        const camera = new THREE.OrthographicCamera(
+    if (event.key == "+"){
+         cameraHeight -= 100;
+         cameraWidth -= 100;
+        camera = new THREE.OrthographicCamera(
             cameraWidth / -2,
             cameraWidth / 2,
             cameraHeight / 2,
@@ -309,6 +310,7 @@ window.addEventListener("keydown", function(event) {
         );
         camera.position.set(0, -210, 300);
         camera.lookAt(look1, look2, look3);
+        scene.add(camera);
         renderer.render(scene, camera);
         return;
     }
