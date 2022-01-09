@@ -37,7 +37,7 @@ var table = Table();
 table.position.z = -55;
 scene.add(table);
 
-camera.position.set(0, -210, 300);
+camera.position.set(0, -100, 300);
 
 var look1 = 0;
 var look2 = 0;
