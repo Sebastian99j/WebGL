@@ -30,6 +30,22 @@ var camera = new THREE.OrthographicCamera(
     1000
 );
 
+const geometry = new THREE.TorusGeometry( 100, 30, 160, 1000 );
+const material = new THREE.MeshPhongMaterial( { color: "#00BFFF" } );
+const torus = new THREE.Mesh( geometry, material );
+torus.position.y = 50;
+torus.position.x = 450;
+scene.add( torus );
+
+const geometrySphaere = new THREE.SphereGeometry( 100, 270, 110 );
+const materialSphaere = new THREE.MeshPhongMaterial( { map:loader.load('earth.jpg') } );
+materialSphaere.color.convertSRGBToLinear();
+const sphereStatue = new THREE.Mesh( geometrySphaere, materialSphaere );
+sphereStatue.position.y = 50;
+sphereStatue.position.z = 100;
+sphereStatue.position.x = 450;
+scene.add( sphereStatue );
+
 var plane = Plane();
 scene.add(plane);
 

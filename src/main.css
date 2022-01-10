@@ -101,4 +101,5 @@ canvas {
     transform: translateY(-50%);
     font-size: 60px;
     font-weight: bold;
+    color: rgb(248, 252, 2);
 }
