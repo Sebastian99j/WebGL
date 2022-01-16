@@ -1,7 +1,10 @@
 const scene = new THREE.Scene();
 
-var colorsField = ["#FAF0E6","#CD7F32"]
-var colorsPawn = ["#FFDEAD","#000000"]
+var colorsField = ["#FAF0E6","#CD7F32"];
+var colorsPawn = ["#FFDEAD","#000000", "#FF0000", "#FFD700"];
+
+var pawns = new Array();
+var found;
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
 scene.add(ambientLight);
@@ -38,7 +41,7 @@ torus.position.x = 450;
 scene.add( torus );
 
 const geometrySphaere = new THREE.SphereGeometry( 100, 270, 110 );
-const materialSphaere = new THREE.MeshPhongMaterial( { map:loader.load('earth.jpg') } );
+const materialSphaere = new THREE.MeshPhongMaterial( { map:loader.load('./textures/earth.jpg') } );
 materialSphaere.color.convertSRGBToLinear();
 const sphereStatue = new THREE.Mesh( geometrySphaere, materialSphaere );
 sphereStatue.position.y = 50;
@@ -70,10 +73,11 @@ window.addEventListener('click', event => {
     clickMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     clickMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
   
-    const found = intersect(clickMouse);
+    found = intersect(clickMouse);
     if (found.length > 0) {
       if (found[0].object.userData.draggable) {
         draggable = found[0].object
+        console.log("pawn "+ found[0].object.number)
         console.log(`found draggable ${draggable.userData.name}`)
       }
     }
@@ -112,7 +116,7 @@ function Table(){
     const geometry = new THREE.BoxGeometry(1200, 1200, 100);
 
     const cubeMaterial = new THREE.MeshStandardMaterial({
-        map:loader.load('wood.jpg')
+        map:loader.load('./textures/wood.jpg')
     });
     cubeMaterial.color.convertSRGBToLinear();
 
@@ -145,7 +149,7 @@ function Plane(){
                         f.position.x = -360 + (90 * i *2);
                     }
                 }
-                f.position.y = y;     
+                f.position.y = y;  
                 plane.add(f);
             }
         }
@@ -173,7 +177,9 @@ function Plane(){
                 }
                 p.position.y = y;
                 p.rotation.x = 11;
-                p.userData.currentSquare = i;       
+                p.userData.currentSquare = i;
+                p.number = `${y}${i}`;
+                pawns.push(p);         
                 plane.add(p);
             }
         }
@@ -202,6 +208,8 @@ function Plane(){
                 p.position.y = y;
                 p.rotation.x = 11;
                 p.userData.currentSquare = i;        
+                p.number = `${y}${i}`;
+                pawns.push(p);     
                 plane.add(p);
             }
         }
@@ -230,6 +238,7 @@ function Field(number){
 }
 
 function Pawn(number){
+
     const geometry = new THREE.CylinderGeometry(40, 40, 75, 200);
 
     const pawnMesh = new THREE.Mesh(
@@ -335,9 +344,62 @@ window.addEventListener("keydown", function(event) {
         Reset();
         return;
     }
+
+    if (event.key == "K" || event.key == "k"){
+       var newPawns = [];
+
+       pawns.forEach (function (pawn) {
+            if (pawn.number == found[0].object.number){
+
+                var newPawn = Pawn(0);
+                var color = new THREE.Color(colorsPawn[0]);
+
+                if (pawn.material.color.equals(color)){
+                    console.log("bialy");
+                    newPawn = Pawn(2);
+                }
+                else {
+                    console.log(pawn.material.color);
+                    newPawn = Pawn(3);
+                }
+
+                newPawn.rotation.x = 11;
+
+                newPawn.position.x = pawn.position.x;
+                newPawn.position.y = pawn.position.y;
+                newPawn.position.z = pawn.position.z;
+
+                scene.clear();
+                newPawns.push(newPawn);
+            }
+            else {
+                newPawns.push(pawn);
+            }
+          })
+
+          newPawns.forEach (function(pawn){
+            scene.add(pawn);
+        })
+
+        pawns = newPawns;
+
+        scene.add(camera);
+        scene.add(plane);
+        scene.add(table);
+        scene.add(ambientLight);
+        scene.add(directionalLight);
+        scene.add(torus);
+        scene.add(sphereStatue);
+
+        renderer.render(scene, camera);
+
+        return;
+    }
 });
 
 const animate = () => {
+    sphereStatue.rotation.x += 0.01;
+    sphereStatue.rotation.y += 0.01;
     dragObject();
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
